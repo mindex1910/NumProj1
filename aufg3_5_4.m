@@ -1,6 +1,6 @@
 
 f=@(x,y) 1;
-n_max = 10;
+n_max = 7;
 
 integral = zeros(1,n_max-1);
 c1=0;
@@ -13,9 +13,9 @@ for n = 2:n_max
 end
 
 error = integral-pi;
-plot(1:n_max,error)
+plot(1:n_max-1,error)
 set(gca,'xtick',([min(xlim):max(xlim)]))
-set(gca,'xticklabel',2^[1:n_max])
+set(gca,'xticklabel',arrayfun(@(x) 2^x, [1:n_max-1]))
 xlabel('Anzahl an Ecken zur Approximation')
 ylabel('Fehler')
 
