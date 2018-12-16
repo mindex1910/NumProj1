@@ -1,6 +1,6 @@
 
 f=@(x,y) 1;
-n_max = 10
+n_max = 10;
 
 integral = zeros(1,n_max-1);
 c1=0;
@@ -11,7 +11,13 @@ for n = 2:n_max
     c2=c2/(c1+1)*sqrt(1/(1+(c2^2/(c1+1)^2)));
     c1 = c1_tmp;
 end
-integral
+
+error = integral-pi;
+plot(1:n_max,error)
+set(gca,'xtick',([min(xlim):max(xlim)]))
+set(gca,'xticklabel',2^[1:n_max])
+xlabel('Anzahl an Ecken zur Approximation')
+ylabel('Fehler')
 
 %{
     Output:  2.0000    2.8284    3.0615    3.1214    3.1365    3.1403    
