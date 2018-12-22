@@ -7,7 +7,7 @@ for n = 1:n_max
 end
 
 error = integral-pi;
-semilogx(1:n_max,error)
+loglog(1:n_max,error)
 %plot(1:n_max, error)
 xlabel('n')
 ylabel('Fehler')

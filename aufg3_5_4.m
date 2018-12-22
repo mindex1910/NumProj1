@@ -1,6 +1,6 @@
 
 f=@(x,y) 1;
-n_max = 7; % maximale Anzahl der Ecken
+n_max = 7; % 2^n_max ... maximale Anzahl der Ecken
 integral = zeros(1,n_max-1);
 c1=0;
 c2=1;
@@ -12,7 +12,7 @@ for n = 2:n_max
 end
 
 error = integral-pi;
-plot(1:n_max-1,error)
+semilogy(1:n_max-1,error)
 set(gca,'xtick',([min(xlim):max(xlim)]))
 set(gca,'xticklabel',arrayfun(@(x) 2^x, [1:n_max-1]))
 xlabel('Anzahl an Ecken zur Approximation')
