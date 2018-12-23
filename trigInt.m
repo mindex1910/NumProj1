@@ -1,4 +1,4 @@
-
+--    
 function ret_val = quadInt(f,n)
     [nodes, weights] = gauss(n);
     function ret = f_n(s,t)

@@ -13,16 +13,6 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{tikz}
-\usetikzlibrary{calc,patterns,angles}
-
-
-\usetikzlibrary{quotes}
-
-
-
-
-%\usepackage{angles}
-%\usepackage{quotes}
 % links in pdf
 \usepackage[unicode,colorlinks=true,pagebackref=false]{hyperref}
 \usepackage{listings}
@@ -130,13 +120,9 @@ Sie gibt den approximierten Wert des Integrals der übergebenen Funktion auf $\h
 %		\end{lstlisting}
 % Was tut das??
 }
-
-\begin{flushleft}
-	
-{\textbullet} Widmen wir uns jetzt noch der Frage für welche $n$ ein Polynom $ p \in \prod_{2}^k:=span\{x^iy^j:0 \leq i,j\leq k \} $ exakt integriert wird: \\
-\vspace{3mm}	
+Widmen wir uns jetzt noch der Frage für welche $n$ ein Polynom $ p \in \prod_{2}^k:=span\{x^iy^j:0 \leq i,j\leq k \} $ exakt integriert wird.		
 Wir wissen dass für 1D Quadraturen Polynome vom Grad $2n+1$ exakt numerisch berechnet werden können. Da in (0.1) lediglich die Gauß-Quadratur 2-mal hintereinander eindimensional durchgeführt wird, gilt, dass i=2n+1 und j=2n+1 die höchsten Grade sind, für welche die 2D Quadratur exakt numerisch berechnet werden kann.
-\end{flushleft}
+
 
 \subsubsection{3.2 Aufgabenstellung}
 		Da zum Beispiel bei der Finite-Element-Methode eine Quadratur auf Dreiecken benötigt wird, verwendet man gerne die \textit{Duffy-Transformation} um die Quadratur auf dem Einheitsquadrat \^{Q} auf das Referenzdreieck \^{T} mit den Eckpunkten $ (0,0),(1,0)$ und $ (0,1)$ zu transformieren.
@@ -182,9 +168,9 @@ Auf unseren Fall angewandt mit $\Omega=\hat{Q}$, $\Psi=\hat{T}$, sowie mit der F
 	\end{array}
 	\right)| = |(1-s)| 
 \end{equation*}
-\vspace*{5mm}
+
 ergibt sich
-		\vspace{-7mm}
+		\vspace{10mm}
 	
 
 	
@@ -201,7 +187,7 @@ ergibt sich
 		\vspace{3mm}
 		Dadurch ergibt sich insgesamt: 
 		\\
-		\vspace*{-4mm}
+		\vspace{-2mm}
 	
 		\begin{equation}
 		trigInt(f,n) = quadInt(f\circ(s,t) \mapsto (s,(1-s)t))*(1-s)
@@ -286,7 +272,7 @@ ergibt sich
 		\end{array}
 		\right)$
 		
-		\vspace{7mm}
+		\vspace{5mm}
 		zur Hand, wobei die Vektoren $\vec{v}$ und $\vec{w}$ Konvex-Kombinationen der Punkte $a$ und $b$ sind:
 		
 		\vspace{4mm}
@@ -297,31 +283,28 @@ ergibt sich
 		\coordinate[label=right:$b$] (B) at (10,2); 
 		\coordinate[label=above:$c$] (C) at (6,2.5); 
 		
-		\path [->]
-		(A) edge node [left]{$\vec{v}$} (C)   ;
-		
-		\draw(A) -- (B) -- (C) -- (A);
+		\draw[->] (A) -- (B) -- (C) -- (A);
 		%warum funktioniert vektor nicht?
-
+		\path [->] 
+		(A) edge node [left]{$\vec{v}$} (C)   ;
 		\path[->]
-		(B) edge node [above]{$\vec{w}$} (C) ; 
-		%(A) edge node [left]{$\vec{v}$} (C)   ; 
+		(B) edge node [above]{$\vec{w}$} (C) ;  
 		
 		\end{tikzpicture}
 	
-	\vspace{5mm}
-		Die Transformation erfolgt mit
-		\vspace*{-2mm}
-	
+	\vspace{3mm}
+		Das Dreieck kann nun wie folgt dargestellt werden:
+		
+		\vspace*{2mm}
 		\begin{equation*}
-			(1-t)\hat v+s*\hat w
+			(1-t)v+s*w)
 		\end{equation*}	
 			
 		und die angepasste \textit{Duffy-Transformation} lautet wie folgt: \\
 		
 	
-		 \vspace*{-4mm}
 		
+		\vspace*{1mm}
 		
 		\begin{equation*}
 				(s,t) \mapsto \left(
@@ -354,42 +337,20 @@ ergibt sich
 
 		\vspace{2mm}
 		
-		\begin{equation*}
-			(s,t) \mapsto  c=\left(
-			\begin{array}{ccc}
+		
+		$(s,t) \mapsto  c=\left(
+		\begin{array}{ccc}
 			t-st\\
 			s\\
-			\end{array}
-			\right) = \left(
-			\begin{array}{ccc}
+		\end{array}
+		\right) = \left(
+		\begin{array}{ccc}
 			t*(1-s)\\
 			s\\
-			\end{array}
-			\right)
-		\end{equation*}. \newline
-		\vspace{-6mm}
-		\begin{flushleft}
-			und wir sehen, dass unsere Transformation korrekt funktioniert.
-		\end{flushleft}
-		 
-	\vspace{6mm}
-		Die Funktionaldeterminate berechnen wir mit Maple:
+		\end{array}
+		\right)$. \newline
 		
-		
-		          \begin{center}
-		          
-		\includegraphics[width=1\textwidth]{tria_mw1.png}
-		\centerline{Variablendeklaration}
-		\label{fig:Bild1}
-		
-		
-		
-		\centering
-		\includegraphics[width=1\textwidth]{mw12.png}
-		\centerline{Jacobi-Matrix und Determinantenberechnung}
-		\label{fig:Bild1}
-	\end{center}
-		
+		Damit ist unsere Transformation korrekt und wir können mit der Implementierung des Codes voranschreiten:
 	
 	\vspace{3mm} 
 		
@@ -421,28 +382,27 @@ ergibt sich
 		\begin{flushleft}
 		
 		\color{change2}
+		\textbf{Widmen wir uns nun noch der Frage wann ein Polynom $ p \in \prod_{2}^k:=span\{x^iy^j:0 \leq i+j\leq k \} $ exakt integriert werden kann:}
 		
-	{\textbullet} Widmen wir uns nun noch der Frage wann ein Polynom $ p \in \prod_{2}^k:=span\{x^iy^j:0 \leq i+j\leq k \} $ exakt integriert werden kann:\\
-		\vspace{4mm}
-		Da wir nur die Hülle $span\{x^iy^j:0 \leq i+j \leq k\}$ betrachten, können wir das Polynom $p=x^iy^j$ mit den höchstmöglichen Graden $i$ und $j$ heranziehen.\\
-		\vspace{4mm}
+		Da wir nur die Hülle $span\{x^iy^j:0 \leq i+j \leq k\}$ betrachten, können wir das Polynom $p=x^iy^j$ mit den höchstmöglichen Graden $i$ und $j$ heranziehen.
+		
 		Sei nun $ p \in \prod_{2}^k \Rightarrow \int_{\hat{T}}^{} p(x,y)d(x,y) = 
 		\int_{\hat{Q}}^{} p(\Phi(x),\Phi(y)) * det|d\Phi| d(s,t)$ .
-		Für $p=x^iy^j$ lautet die Transformation wie folgt: \\
-		\vspace{5mm}
-		\centerline{$p(\Phi(x),\Phi(y)) = (\alpha_1+s\alpha_2+t\alpha_3+st\alpha_4)^i(\beta_1+s\beta_2+t\beta_3+st\beta_4)^j$.} 
-		\vspace{4mm}
-		Aus diesem Ausdruck lesen wir heraus dass der höchste Term $\delta_0s^it^is^jt^j = s^{(i+j)}t^{(i+j)}\delta_0$	mit einer Konstanten $\delta_0$ ist, die in diesem Fall vernachlässigt werden kann.\\
-			\vspace{4mm}
-			Hingegen ist der höchste Term der Funktionaldeterminante $det|D\Phi|$ $\delta_1st$.\\
-			%\vspace{0.5mm}
+		
+		Für $p=x^iy^j$ lautet die Transformation wie folgt:
+		
+		$p(\Phi(x),\Phi(y)) = (\alpha_1+s\alpha_2+t\alpha_3+st\alpha_4)^i(\beta_1+s\beta_2+t\beta_3+st\beta_4)^j$. \\
+		
+		Aus diesem Ausdruck lesen wir heraus dass der höchste Term $\delta_0s^it^is^jt^j = s^{(i+j)}t^{(i+j)}\delta_0$	mit einer Konstanten $\delta_0$ ist, die in diesem Fall vernachlässigt werden kann.
+			
+			Hingegen ist der höchste Term der Funktionaldeterminante $det|D\Phi|$ $\delta_1st$.
+			
 			
 			Somit ist der größte Term von
 			 $\int_{\hat{Q}}^{} p(\Phi(x),\Phi(y)) * det|d\Phi| d(s,t)$ 
 			 vom Grad
-			 $\delta^{i+j+1}t^{i+j+1}$.\\
-			 %\vspace{0.5mm}
-			 Da $i+j+1\leq2n+1$ gefordert wird, muss  $i+j\leq2n$ sein.
+			 $\delta^{i+j+1}t^{i+j+1}$.
+			 Da $i+j+1\leq2n+1$ gefordert wird,  $i+j\leq2n$.
 			 			
 			
 		\end{flushleft}
@@ -486,16 +446,12 @@ ergibt sich
 		(A) edge node [below]{$\vec{v}$} (D)   
 		(B) edge node [above]{$\vec{w}$} (C)   
 		; 
-		\end{tikzpicture} \\
-		\vspace*{2mm}
-		\begin{flushleft}
-			erweitern.\\
-			Die Konvexkombination funktioniert analog zu der in Aufgabe $(3.3)$:  \\
-		\end{flushleft}
+		\end{tikzpicture}
+		
+		erweitern.
 		
 		
-		
-		
+		Die Konvexkombination funktioniert analog zu der in Aufgabe $(3.3)$: \\ \\
 		
 		\hspace{4cm}$\vec{v}*(1-t)+\vec{w}*t$
 		\color{change2}
@@ -508,27 +464,8 @@ ergibt sich
 		\\Wenn man dies ausmultipliziert ergibt das genau die Transformation die in der Aufgabenstellung angegeben ist. \\
 		\begin{flushleft}
 	
-	
-	\pagebreak
-		Die Berechnung der Funktionaldeterminante erfolgt wieder durch Maple:
-	
-		
-		\begin{center}
-			
-			\includegraphics[width=1\textwidth]{square1det.png}
-			\centerline{Variablendeklaration}
-			\label{fig:Bild1}
-			
-			
-			
-			\centering
-			\includegraphics[width=1\textwidth]{square2det.png}
-			\centerline{Jacobi-Matrix und Determinantenberechnung}
-			\label{fig:Bild1}
-		\end{center}
-	
-	{\large\textbullet}	Letztlich widmen wir uns der Frage wir nur konvexe Vierecke verwenden dürfen:\\
-		Da die Vektoren konvexkombiniert werden ist es augenscheinlich dass nur konvexe Vierecke für unsere Transformation geeignet sind.
+		Letztlich widmen wir uns der Frage wir nur konvexe Vierecke verwenden dürfen:\\
+		Da die Vektoren konvexkombiniert werden ist es augenscheinlich dass nur konvexe Vierecke für unsere Transformation geeignet sind..
 		
 			\end{flushleft}
 		\subsubsection{3.4 Code}
@@ -557,7 +494,6 @@ ergibt sich
 		
 		
 		\color{change2}
-		\pagebreak
 		\subsubsection{3.5 Aufgabenstellung}
 		
 		 Testen Sie ihre Quadraturen f$\ddot{u}$r $\int \limits_{G} \! f(x,y) \, d(x,y)$:
@@ -570,11 +506,7 @@ ergibt sich
 		\noindent %ab hier der Text, der eingerückt werden soll
 		
 			\begin{flushleft}
-				
-			
-			{\large\textbullet} $f(x,y)= x^7+3x^4y^4+3x^2y+7y^6 , G=conv\{(0,0),(0,5,-0,5),(1,1)\}$
-			
-			 
+			$-f(x,y)= x^7+3x^4y^4+3x^2y+7y^6 , G=conv\{(0,0),(0,5,-0,5),(1,1)\}$ \\
 			Stimmt das benötigte n um das Prolynom exakt zu integrieren mit den theoretischen Überlegen zusammen? Wenn nicht, wieso?
 			
 			
@@ -583,56 +515,65 @@ ergibt sich
 				
 				
 		\vspace{5mm}
-		Berechnung mittels Maple:
+		Transformation und Integration mit Maple von 
+		$\int_{0}^{1}\int_{0}^{1}f(d_1(s,t),d_2(s,t)|det(md)|dsdt$.
 		\end{flushleft}
 		
-
+		
+			
+				\centering
+				\includegraphics[width=1\textwidth]{tria_mw1.png}
+				\centerline{Variablendeklaration}
+				\label{fig:Bild1}
+			
+			
+		
+		
+		
+			
+				
+			\centering
+			\includegraphics[width=1\textwidth]{mw12.png}
+			\centerline{Jacobi-Matrix und Determinantenberechnung}
+			\label{fig:Bild1}
 			
 			
 		
 			
-			\begin{center}
-				
-				
+			
+				\centering
 				\includegraphics[width=1\textwidth]{tria_mw4.png}
 				\centerline{Endresultat}
 				\label{fig:Bild1}
-			\end{center}
 						
 			
 			
-	
+	\vspace{4cm}
 			
 			
 			
 			\color{change2}
-			\begin{flushleft}
-				Testen der Quadratur für die Funktion  $f(x,y)= x^7+3x^4y^4+3x^2y+7y^6 , G=conv\{(0,0),(0,5,-0,5),(1,1)\}$:
-			\end{flushleft} 
+			Implementierung des Codes: \\ 
 			
 			\color{change}				\lstinputlisting{aufg3_5_1.m} 
 			\begin{lstlisting} 
 			
 			
 			\end{lstlisting} 
-			\color{change2}
-			\vspace{4mm}
-			Plot:
-			\begin{center}
+			\color{change2}Plot:
 				
 				\includegraphics[width=0.7\textwidth]{plot1.png} %70% der Textbreite
 				\\
 				\centerline{Plot 3.5.1}
-				\end{center}	
+			
 				
 				\color{change2}
 			
 				
 
 
-\vspace{0.5cm}				
-			\flushleft 
-			{\large\textbullet} $f(x,y)=\sin(50x)\sin(50y), G=conv\{(1,0),(10.2),(3,4)(-1,1)\})$
+\vspace{2.5cm}				
+			\flushleft $-f(x,y)=\sin(50x)\sin(50y), G=conv\{(1,0),(10.2),(3,4)(-1,1)\})$
 				
 			
 				
@@ -658,10 +599,10 @@ ergibt sich
 						
 				
 			
-				\vspace{0.5cm}
+				\vspace{2cm}
 				
 \color{change2}
-		\flushleft{\large\textbullet}	 $f(x,y)= \sqrt{\frac{9y}{(1-x^2)}} , G=\hat{Q} $
+		\flushleft	 $-f(x,y)= \sqrt{\frac{9y}{(1-x^2)}} , G=\hat{Q} $
 			
 					
 					\color{change}
@@ -685,12 +626,12 @@ ergibt sich
 					\label{fig:Bild1}
 				\end{centering} \\
 			
-			\vspace{10mm}
-				{\large\textbullet} 	$ f(x,y) = \begin{cases} 
+			
+					$ -f(x,y) = \begin{cases} 
 					1, x^2+y^2 \leq 1 \\
 					0, sonst
-					\end{cases} , G=\mathbb{R}^2$ \\
-					\vspace{3mm}
+					\end{cases} , G=\mathbb{R}^2$
+					
 						\textit{Hinweis:} Approximieren Sie den Kreis durch ein n-Eck.
 						Verwenden Sie die letzten beiden Beispiele um $\pi$ zu approximieren.
 						Nehmen Sie als Referenzwert bei allen Integralen den analytisch bestimmten Integralwert, sofern dies mölgich ist und stellen Sie die Fehler grafisch dar.\\ Betrachten wir folgende Skizze:\\
@@ -698,7 +639,6 @@ ergibt sich
 						\vspace{14mm}
 						\hspace{2.7cm}
 						\begin{tikzpicture}
-			\coordinate (Q) at (0,0);
 							\draw[line width=0mm,red] (0,0)--(2.3,0) node [below] {$b$};
 							\draw[line width=0mm,blue] (1.2,1.2) -- (1.2,1.2) node [right=0.5cm] {$\tilde c_2$};
 					\draw[thick,->,blue] (-3,0)--(3,0) node[below] {$x$}; % x axis
@@ -710,11 +650,10 @@ ergibt sich
 					\draw[red] (2.5,0) -- (0,2.5) node [above right] {$c$};
 					\draw[blue](1.25,1.25) -- (1.25,0)   node [below left] {$x_1$};
 					\draw [blue] (1.25,1.25) -- (1.25,0.75) node[below right=-0.05cm] {$x_2$};
-					\draw[very thin, blue] ([shift=(0:0.5)]Q)  arc (0:25:1) node[xshift=-0.05cm, yshift=-0.27cm]{$\delta$};
+					
 					
 						\end{tikzpicture}\\
-						
-						\vspace{1cm}
+					\vspace{1cm}
 					Durch den Satz von Pythagoras ergibt sich: \\ 
 					\vspace{0.5cm} 
 					\centerline{$x=(\frac{a_1+b_1}{2},\frac{a_2+b_2}{2}))$.}  
@@ -756,7 +695,7 @@ ergibt sich
 					
 					und schließlich als Endresultat \\
 			\vspace{5mm}
-					\centerline{$\frac{x_2}{x_1}=$$\frac{\frac{c_2+b_2}{2}}{\frac{c_1+b_1}{2}}$$=\frac{c_2}{c_1+1}$}
+					\hspace{4cm}$\frac{x_2}{x_1}=$$\frac{\frac{c_2+b_2}{2}}{\frac{c_1+b_1}{2}}$$=\frac{c_2}{c_1+1}$
 						
 						
 						%$\frac{\frac{c_2+b_2}{2}}{\frac{c_1+b_1}{2}}$
@@ -781,8 +720,6 @@ ergibt sich
 				
 				
 				\color{change2}
-				
-				\vspace{4mm}
 				Der folgende Plot veranschaulicht das Resultat graphisch: (loglog Plot missing)
 				\vspace{-2mm}	
 						\centering
@@ -794,6 +731,11 @@ ergibt sich
 					
 				
 				
+		
+		
+	
+			
+	
 	
 		
 	
