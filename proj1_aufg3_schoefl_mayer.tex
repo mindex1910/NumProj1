@@ -14,7 +14,7 @@
 \usepackage{mathtools}
 \usepackage{tikz}
 % links in pdf
-\usepackage[unicode,colorlinks=true,pagebackref=false]{hyperref}
+\usepackage[unicode,colorlinks=false,pagebackref=false]{hyperref}
 \usepackage{listings}
 %\usepackage{maplestd2e}
 % Zum Druck verwende schwarze Links!
@@ -22,6 +22,7 @@
 % colorlinks=false umrahmt Links statt einzufaerben, 
 
 \counterwithout{figure}{chapter}
+\counterwithout{equation}{chapter}
 
 
 % document style
@@ -124,7 +125,7 @@ Sie gibt den approximierten Wert des Integrals der übergebenen Funktion auf $\h
 % Was tut das??
 }
 Widmen wir uns jetzt noch der Frage für welche $n$ ein Polynom $ p \in \prod_{2}^k:=\SPAN\{x^iy^j:0 \leq i,j\leq k \} $ exakt integriert wird.		
-Wir wissen, dass mittels 1D Quadraturen vom Grad $n$ Polynome vom Grad $2n+1$ exakt numerisch berechnet werden können. Sei die in \ref{equ:integral} vorkommende Funktion $f$ nun unser Polynom $p$. Da zunächst nach $x$ integriert wird, wirken die in $p$ vorkommenden $y$ bloß als reelle Koeffizienten. Somit kann $p$ genau dann numerisch exakt nach $x$ integriert werden, wenn das Polynom
+Wir wissen, dass mittels 1D Quadraturen vom Grad $n$ Polynome vom Grad $2n+1$ exakt numerisch berechnet werden können. Sei die in (\ref{equ:integral}) vorkommende Funktion $f$ nun unser Polynom $p$. Da zunächst nach $x$ integriert wird, wirken die in $p$ vorkommenden $y$ bloß als reelle Koeffizienten. Somit kann $p$ genau dann numerisch exakt nach $x$ integriert werden, wenn das Polynom
 \begin{equation*}
 	x \mapsto p_y(x) := p(x,y)
 \end{equation*}
@@ -166,7 +167,7 @@ Implementieren Sie mithilfe der \textit{Duffy-Transformation} die Funktion \text
 \vspace{0.5cm}
 		% Funktionaldeterminante anpassen
 		
-In unserem Fall sei $\Omega=(0,1)\times(0,1)$. Dies entspricht der Menge $\hat{Q}$ ohne Rand, welcher jedoch eine Nullmenge bezüglich des zweidimensionalen Lebesguemaß darstellt und somit $\int_{(0,1)\times(0,1)}f(x)dx = \int_{\hat{Q}}f(x)dx$ gilt. Analog ist das Integral einer Funktion über $\hat{T}$ ident mit jenem über $\hat{T}$ ohne den Rand $\partial\hat{T}$. Für $\Phi$ wählen wir die Abbildung $\Psi$. Diese ist offenbar unendlich oft stetig differenzierbar, hat auf $\hat{T}\backslash\partial\hat{T}$ mit 
+In unserem Fall sei $\Omega=(0,1)\times(0,1)$. Dies entspricht der Menge $\hat{Q}$ ohne Rand, welcher jedoch eine Nullmenge bezüglich des zweidimensionalen Lebesguemaß darstellt und somit $\int_{(0,1)\times(0,1)}f(x)dx = \int_{\hat{Q}}f(x)dx$ gilt. Analog ist das Integral einer Funktion über $\hat{T}$ ident mit jenem über $\hat{T}$ ohne den Rand $\partial\hat{T}$. Für $\Phi$ wählen wir die Abbildung $\Psi$. Diese ist offenbar unendlich oft stetig differenzierbar und hat auf $\hat{T}\backslash\partial\hat{T}$ mit 
 \begin{equation*} 
 	\Psi^{-1} := \begin{cases} 
 	\hat{T}\backslash\partial\hat{T}\ \to \hat{Q}\backslash\partial\hat{Q} \\
@@ -244,7 +245,7 @@ $c=\left(\begin{array}{ccc}
 \end{tikzpicture}
 \vspace{4mm}
 
-\noindent Die Fläche des Dreiecks ist nun genau die Konvexe Hülle der Eckpunkte. Um diese zu bilden, betrachten wir zunächst die Vektoren  
+\noindent Die Fläche des Dreiecks ist nun genau die konvexe Hülle der Eckpunkte. Um diese zu bilden, betrachten wir zunächst die Vektoren  
 
 \begin{equation*}
 	v=\left(
@@ -317,9 +318,9 @@ Die Funktion \textbf{duffyInt}, hat die Inputparameter
 \begin{itemize}
 \item \code{f} ein Function Handle einer Funktion mit oben beschriebenen Eigenschaften,
 \item \code{n} der Grad der Gaußquadratur.
-\item \code{$a_1,a_2$} : Koordinaten des Punktes a
-\item \code{$b_1,b_2$} : Koordinaten des Punktes b
-\item \code{$c_1,c_2$} : Koordinaten des Punktes c
+\item \code{$a_1,a_2$} Koordinaten des Punktes a,
+\item \code{$b_1,b_2$} Koordinaten des Punktes b,
+\item \code{$c_1,c_2$} Koordinaten des Punktes c.
 \end{itemize} 
 Sie gibt den approximierten Wert des Integrals nach der Transformation auf ein beliebiges Dreieck mit den Eckpunkten (a,b,c) zurück.
 
@@ -332,7 +333,7 @@ showstringspaces=false}
 
 
 
-Widmen wir uns nun noch der Frage wann ein Polynom $ p \in \prod_{2}^k:=\SPAN\{x^iy^j:0 \leq i+j\leq k \} $ exakt integriert werden kann.Da $p$ eine Linearkombination von Polynomen der Gestalt $(x,y) \mapsto x^iy^j$ ist, reicht es das Polynom $q(x,y) = x^iy^j$ zu betrachten. Unter der Transformation $\Phi$ wird $q$ zu 
+Widmen wir uns nun noch der Frage wann ein Polynom $ p \in \prod_{2}^k:=\SPAN\{x^iy^j:0 \leq i+j\leq k \} $ exakt integriert werden kann. Da $p$ eine Linearkombination von Polynomen der Gestalt $(x,y) \mapsto x^iy^j$ ist, reicht es das Polynom $q(x,y) = x^iy^j$ zu betrachten. Unter der Transformation $\Phi$ wird $q$ zu 
 \begin{equation*}
 	q(\Phi(x),\Phi(y)) = (\alpha_1+s\alpha_2+t\alpha_3+st\alpha_4)^i(\beta_1+s\beta_2+t\beta_3+st\beta_4)^j.
 \end{equation*}
@@ -530,7 +531,7 @@ Aus Abbildung \ref{fig:3_5_3} wird ersichtlich, dass der numerische Wert nur seh
 
 \pagebreak Um die Fläche des Einheitskreises numerisch zu berechnen, approximieren wir diesen mit jeweils $2^n$ Dreiecken, benutzen eine Gaußquadratur vom Grad 0, um das Integral der  konstanten Einsfunktion über einem der Dreiecke und multiplizieren dieses Ergebnis mit $2^n$. Im folgenden wird kurz eine Möglichkeit skizziert wie man rekursiv auf die richtigen Eckpunkte eines der Dreiecke kommt.
 
-\noindent Betrachten wir dazu folgende Skizze. Wir gehen von dem Dreieck, welches von den Punkten $a$, $b$ und $c$ aufgespannt wird aus und wollen uns den Punkt $\tilde{c} = \left(\begin{array}{ccc}
+\noindent Betrachten wir dazu folgende Skizze. Wir gehen von dem Dreieck, welches von den Punkten $a$, $b$ und $c$ aufgespannt wird aus und wollen den Punkt $\tilde{c} = \left(\begin{array}{ccc}
 	\tilde{c_1} \\
 	\tilde{c_2}\\
 \end{array}\right)$ berechnen.
@@ -553,7 +554,7 @@ Aus Abbildung \ref{fig:3_5_3} wird ersichtlich, dass der numerische Wert nur seh
 
 \end{tikzpicture}\\
 
-Durch den Satz von Pythagoras ergibt sich
+\noindent Durch den Satz von Pythagoras ergibt sich
 \begin{equation*}
 	x=(\frac{a_1+b_1}{2},\frac{a_2+b_2}{2}).
 \end{equation*}  
@@ -563,7 +564,7 @@ Durch den Satz von Pythagoras ergibt sich
 	tan \gamma = \frac{x_2}{x_1} = \frac{\sin\gamma}{\cos\gamma} = \frac{\tilde(c_2)}{\tilde(c_1)}
 \end{equation}
 
-Wir wissen aus
+\noindent  Wir wissen aus
 \begin{equation*}
 	\sin(x)^2+\cos(x)^2=1, 
 \end{equation*}
@@ -587,7 +588,7 @@ Durch Lösen dieses Gleichungssystems ergibt sich
 	\lstinputlisting{aufg3_5_4.m} 
 \end{minipage}
 
-Aus Abbildung \ref{fig:3_5_4} wird ersichtlich, dass dieses Verfahren $\pi$ zu berechnen wesentlich schneller zum Ziel führt. Der Fehler entwickelt sich mit steigender Anzahl der Ecken wie eine Funktion aus $O(n^{-2})$ ein weitere Vorteil dieser Variante ist, dass nur Polynome nullten Grades berechnet werden müssen. 
+Aus Abbildung \ref{fig:3_5_4} wird ersichtlich, dass dieses Verfahren $\pi$ zu berechnen wesentlich schneller zum Ziel führt. Der Fehler entwickelt sich mit steigender Anzahl der Ecken wie eine Funktion aus $O(n^{-2})$. Ein weiterer Vorteil dieser Variante ist, dass nur Polynome nullten Grades berechnet werden müssen. 
 
 \begin{figure}[h]
 	\centering
