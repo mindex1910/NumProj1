@@ -1,4 +1,4 @@
-
+% calculate numerical integration
 f=@(x,y) 1;
 n_max = 7; % 2^n_max ... maximale Anzahl der Ecken
 integral = zeros(1,n_max-1);
@@ -11,14 +11,19 @@ for n = 2:n_max
     c1 = c1_tmp;
 end
 
-error = integral-pi;
-semilogy(1:n_max-1,error)
-set(gca,'xtick',([min(xlim):max(xlim)]))
-set(gca,'xticklabel',arrayfun(@(x) 2^x, [1:n_max-1]))
+% calculate error and reference function O
+error = abs(integral-pi);
+O = error;
+for n=2:n_max-1
+    O(n) = (2^n)^(-2)*O(1)
+end
+
+% plot error and reference function O
+x_ax = [2,4,8,16,32,64];
+hold off
+loglog(x_ax,error)
+hold on 
+loglog(x_ax,O)
 xlabel('Anzahl an Ecken zur Approximation')
 ylabel('Fehler')
-
-%{
-    Output:  2.0000    2.8284    3.0615    3.1214    3.1365    3.1403    
-                3.1413    3.1415    3.1416
-%}
+legend('error','O(n^{-2})')

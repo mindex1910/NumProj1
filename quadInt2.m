@@ -1,11 +1,11 @@
 
 function ret_val = quadInt2(f,n,a1,a2,b1,b2,c1,c2,d1,d2)
     [nodes, weights] = gauss(n);
-    function ret = f_n(u,v)
-        x = (d1-b1+a1)*u*v+(c1-a1)*u+(b1-a1)*v+a1;
-        y = (d2-b2+a2)*u*v+(c2-a2)*u+(b2-a2)*v+a2;
-        ret = abs(a1*b2*u-a1*c2*u-a1*d2*u+a1*d2*v-a2*b1*u+a2*c1*u+a2*d1*u...
-            -a2*d1*v+b1*c2*u-b1*d2*v-b2*c1*u+b2*d1*v+c1*d2*u-c2*d1*u-a1*b2...
+    function ret = f_n(s,t)
+        x = (d1-b1+a1)*s*t+(c1-a1)*s+(b1-a1)*t+a1;
+        y = (d2-b2+a2)*s*t+(c2-a2)*s+(b2-a2)*t+a2;
+        ret = abs(a1*b2*s-a1*c2*s-a1*d2*s+a1*d2*t-a2*b1*s+a2*c1*s+a2*d1*s...
+            -a2*d1*t+b1*c2*s-b1*d2*t-b2*c1*s+b2*d1*t+c1*d2*s-c2*d1*s-a1*b2...
             +a1*c2+a2*b1-a2*c1-b1*c2+b2*c1)*f(x,y);
     end
     tmp = 0;

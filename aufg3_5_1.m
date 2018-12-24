@@ -1,20 +1,27 @@
 
+% calculate numerical integration
 f=@(x,y) x^7+3*x^4*y^4+3*x^2*y+7*y^6;
 n_max = 10;
 integral = zeros(1,n_max+1);
 for n = 1:n_max+1
     integral(n) = duffyInt(f,n-1,0,0,0.5,-0.5,1,1); 
 end
-integral
 
-% plot error
-error = integral-0.2877808780;
+% calculate error and reference function O
+error = abs(integral-0.2877808780)
+O = error;
+for n=1:4
+    O(n+1) = O(n)/(2^((n-1)^2.4));
+end
+for n=5:n_max
+    O(n+1) = 0;
+end
+
+% plot error and reference function O
+hold off
 loglog(0:n_max,abs(error))
-% set(gca,'xtick',([min(xlim):max(xlim)]))
-% set(gca,'xticklabel',[0:5])
 xlabel('n') 
 ylabel('Fehler')
-
-%{
-    integral =  0.3568    0.3057    0.2880    0.2878    0.2878
-%}
+hold on
+loglog(0:n_max, O)
+legend('error','O(2^{-n(n-1)^{2.4}})')
